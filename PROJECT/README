@@ -1,0 +1,29 @@
+README
+======
+
+this package includes the following files.
+Makefile
+|-- Cipher.cpp --|  methods defined from Cipher.h
+|-- main.cpp --|  main part to create the ciphered text and send it to specified outputfile
+|-- Cipher.h --|  defines methods to be used for Cipher.cpp
+|-- README.txt --|  this Text file
+|--WordBank--| Example Wordbank file !!! Each String Should be seperated with a new charachter delimeter !!!
+|--Keyfile--|Example Keyfile !!!! IMPORTANT The key file MUST BE length 8 bytes for BLOCK CIPHER (8 chars) !!!!
+
+the executable name is Cipher 
+First use  make to create the executable Cipher
+Make clean to clear the executable and .o files
+
+
+there are 7 main functions ReadInput ,ReadKeyfile , WriteToFile , Blockcipher , StreamCipher , Decipherblock  , DecipherStream.
+
+the error messages are clear however ignore the usage error about sacrificing a goat.
+
+1st argument that gets passed is EITHER "B" or "S" Representing BLock cipher or Stream Cipher 
+
+2nd argument is the wordbank name  
+3rd argument is the outputfile name to write the encryption and 
+4th argument is the Keyfile where the string that will XOR the actual wordbank words for Encryption.
+
+
+for the swap part the pointers point at the begining and the end of the full string.

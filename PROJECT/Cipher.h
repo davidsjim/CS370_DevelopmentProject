@@ -46,9 +46,10 @@ void RemovePad(string& input);
 
 
 string inputfile ="";
+string password = "";
 string keyfile = "";
 string Xoredoutput = "";    
-string wordbank [50];
+string wordbank [200];
 
     
 };

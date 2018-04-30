@@ -2,13 +2,12 @@
 #include <cstdlib>
 #include <ctime>
 
-
+using namespace std;
 
 //generate  a random number to pick from the file
 int Cipher::RandNumGen(int limit){
     srand(time(0));
     int random_integer = rand(); 
-     std::cout <<"random int =  " << random_integer % limit << std::endl;
     return( random_integer % limit);
 }
 
@@ -34,6 +33,7 @@ int linecount = 0;
    inputfile =   wordbank[RandNumGen(linecount)] + wordbank[(RandNumGen(linecount) + 278) % linecount ];
    
     std::cout <<"DECIPHEREDTEXT =  " << inputfile  << std::endl;
+    password = inputfile;
   //   std::cout <<"read inputfile bytes =  " << inputfile.length() << std::endl;
 
      if(inputfile.length() == 0){return false;}
@@ -69,7 +69,7 @@ string Cipher :: BlockCipher(){
 string Xorstr;
 string Ciphertext;
 
-    Pad(inputfile);
+   // Pad(inputfile);
     Xorstr = Xor(inputfile , keyfile);
     Ciphertext = Swap(Xorstr, keyfile);
     
@@ -85,7 +85,7 @@ string Cipher :: StreamCipher(){
 }
 
 
-//PUT PADDINGS IF NECCESSARY TO THE INPUT STRING
+/*PUT PADDINGS IF NECCESSARY TO THE INPUT STRING
 string Cipher::Pad(string& input){
     
 int bytes = input.length();
@@ -104,30 +104,6 @@ return input;
 
 }
 
-//XOR the input file with the key
-/*string Cipher :: Xor(string input , string key){
-   char  Xorchar;
-  string substring = "";
-  std::cout <<"fullstring of inputfile  =  " <<input << std::endl;
-   std::cout <<"size inputfile  =  " <<input.length() << std::endl;
-      std::cout <<"keysize  =  " <<key.length() << std::endl;
-  for(int i = 0; i <int(input.length()); i+= 8){
-     substring = input.substr(i , 8);
-      
-     std::cout <<"substring size  =  " <<substring.length() << std::endl;
-  
-
-     
-     for( unsigned int j = 0; j < input.length(); j++){
-        Xorchar = (substring[j]  ^ keyfile[j]);
-        Xoredoutput += Xorchar;
-     }
-    
-      
-  }
-  
-  return Xoredoutput;
-}
 */
 
 //SWAP THE XORED OUTPUT 
@@ -178,7 +154,7 @@ while (begining < end){
 
 
 
-//REMOVE THE PADDER THAT MIGHTVE BEEN ADDED
+//REMOVE THE PADDER THAT MIGHTVE BEEN ADDED NOT USED FOR DEMO
 void Cipher :: RemovePad(string & input){
     
     unsigned char padder=   static_cast <unsigned char> (0x80) ;

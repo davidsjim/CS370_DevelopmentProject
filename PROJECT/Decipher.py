@@ -1,4 +1,5 @@
-import sys
+import os.path
+import time
 
 #DECIPHER THE STREAM ALGORTIHM
 def DecipherStream(  input , key):
@@ -28,6 +29,7 @@ def  Xor(input , key):
     while i < inputsize:
         if k < keysize:
             StreamXor = StreamXor + chr(ord(inputs[i]) ^ ord(keyvals[k]))
+
             k = k +1
             i = i +1
         else:
@@ -41,30 +43,30 @@ def Swap(input ,  key):
     ciphertext = list(input)
     begining = 0
     end = len(input) -1
-    print(end)
+
 
     startptr = ciphertext[begining]
     endptr = ciphertext[end]
 
     counter = 0
     keysize = len(key)
-    print(keysize)
+
     i = 0
     while begining < end:
         counter =counter +1
         if i == keysize:
             i =0;
         for i in range(keysize):
-            print(ord(key[i]))
+
             if (ord(key[i])% 2) != 0:
-                print(input[begining])
+
                 ciphertext[begining] = endptr
                 ciphertext[end] = startptr
                 end = end -1
                 begining = begining + 1
 
                 if begining >= end:
-                    return input
+                    return ''.join(ciphertext)
 
                 startptr = ciphertext[begining]
                 endptr = ciphertext[end]
@@ -79,19 +81,28 @@ def Swap(input ,  key):
     return ''.join(ciphertext)
 
 if __name__ == "__main__":
-###READ THE INCOMING FILE FROM THE OTHER MACHINE
+
     filename = "output"
     keyfile = "key"
     result = ""
-    file = open(filename, 'rb')
 
+###READ THE INCOMING FILE FROM THE OTHER MACHINE
+while not os.path.exists(filename):
+    print("Waiting For File")
+    time.sleep(3)
 
+if os.path.isfile(filename):
+    file = open(filename, 'r')
     Type = file.read(1)
+    print("Encryption Type = " + Type)
+
     CipherText = file.read()
-    print(CipherText)
-###READ THE KEYFILE
+    print("Ciphered Text: " + CipherText)
+    ###READ THE KEYFILE
     f = open(keyfile, 'r')
     key = f.read()
+    f.close()
+    print("keyfile: " + key)
 
     if Type == 'B':
         result = DecipherBlock(CipherText, key)
@@ -99,4 +110,14 @@ if __name__ == "__main__":
         result = DecipherStream(CipherText, key)
 
     print(result)
+
+    f.close()
+    file.close()
+else:
+    raise ValueError("%s isn't a file!" % "./")
+
+
+
+
+
 

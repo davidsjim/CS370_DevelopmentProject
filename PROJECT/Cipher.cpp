@@ -38,11 +38,11 @@ for(int i = 0; i <(int)Bank.length(); i++){
 
     
    
-    std::cout <<"linecount =  " << linecount << std::endl;
+    std::cout <<"lines of words in wordbank:  " << linecount << std::endl;
      
     inputfile =   wordbank[RandNumGen(linecount)] + wordbank[(RandNumGen(linecount) + 278) % linecount ];
    
-    std::cout <<"DecipheredPasswordThat is Suppose to comeout =  " << inputfile  << std::endl;
+    std::cout <<"Deciphered PasswordThat is Suppose to comeout =  " << inputfile  << std::endl;
     password = inputfile;
   //   std::cout <<"read inputfile bytes =  " << inputfile.length() << std::endl;
 

@@ -25,15 +25,15 @@ for(int i = 0; i <(int)Bank.length(); i++){
     
     if(Bank[i] == '\n'){
         wordbank[linecount] = substr;
+        
         linecount++;
-        std::cout <<"read inputfile =  " << substr << std::endl;
         substr = "";
          
     }
     else {
         substr += Bank[i]; 
     }
-    
+     
 }
 
     
@@ -42,7 +42,7 @@ for(int i = 0; i <(int)Bank.length(); i++){
      
     inputfile =   wordbank[RandNumGen(linecount)] + wordbank[(RandNumGen(linecount) + 278) % linecount ];
    
-    std::cout <<"DECIPHEREDTEXT =  " << inputfile  << std::endl;
+    std::cout <<"DecipheredPasswordThat is Suppose to comeout =  " << inputfile  << std::endl;
     password = inputfile;
   //   std::cout <<"read inputfile bytes =  " << inputfile.length() << std::endl;
 
@@ -63,10 +63,12 @@ void Cipher::ReadKeyFile (istream& istr) {
 
 
 // write to file
-void Cipher::WriteToFile(string& filename , string contents){
+void Cipher::WriteToFile(string& filename , string contents ,char CipherType){
     
   ofstream outputfile;
   outputfile.open (filename);
+  contents =  CipherType + contents;
+ std::cout <<"contents  of output file :  " << contents  << std::endl;
   outputfile <<contents;
   outputfile.close();
     
@@ -79,7 +81,7 @@ string Cipher :: BlockCipher(){
 string Xorstr;
 string Ciphertext;
 
-    Pad(inputfile);
+    //Pad(inputfile);
     Xorstr = Xor(inputfile , keyfile);
     Ciphertext = Swap(Xorstr, keyfile);
     

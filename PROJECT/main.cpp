@@ -132,11 +132,11 @@ int main(int argc, char* argv[]){
        
          if(Ciphertype  == "B"){
           ciphertext = cipher.BlockCipher();
-          cipher.WriteToFile(outputfilename , ciphertext);
+          cipher.WriteToFile(outputfilename , ciphertext , 'B');
          }
          else{ 
             ciphertext = cipher.StreamCipher();
-            cipher.WriteToFile(outputfilename , ciphertext);
+            cipher.WriteToFile(outputfilename , ciphertext , 'S');
          }
        
        
@@ -144,7 +144,7 @@ int main(int argc, char* argv[]){
     }
     else{
         string empty = "";
-        cipher.WriteToFile(outputfilename ,empty);
+        cipher.WriteToFile(outputfilename ,empty, ' ');
     }
     
     

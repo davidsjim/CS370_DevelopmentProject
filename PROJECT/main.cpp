@@ -30,7 +30,7 @@ int main(int argc, char* argv[]){
     char login [80];
     char passwrd[80];
     
-    
+    std::cout <<"Welcome To AKDI Servers!! Pleasse identify yourself, "<< std::endl;
     std::cout <<"Enter Your Username: ";
     //store user response here for user name 
     scanf("%s" , login);
@@ -69,7 +69,7 @@ int main(int argc, char* argv[]){
     
     //START THE ACTUAL ENCRYPTING DEPENDING ON THE ENCRYPTION TYPE
     char Encryption [10];
-    std::cout <<"Welcome to the Server: " << std::endl;
+    std::cout <<"Welcome to the Server Please authenticate that you have access: " << std::endl;
     std::cout <<"What type of Encryption Would you like to use:  (Type B for block,  S for stream ) ";
     scanf("%s" ,Encryption );
     
@@ -132,11 +132,11 @@ int main(int argc, char* argv[]){
        
          if(Ciphertype  == "B"){
           ciphertext = cipher.BlockCipher();
-          cipher.WriteToFile(outputfilename , ciphertext);
+          cipher.WriteToFile(outputfilename , ciphertext , 'B');
          }
          else{ 
             ciphertext = cipher.StreamCipher();
-            cipher.WriteToFile(outputfilename , ciphertext);
+            cipher.WriteToFile(outputfilename , ciphertext , 'S');
          }
        
        
@@ -144,7 +144,7 @@ int main(int argc, char* argv[]){
     }
     else{
         string empty = "";
-        cipher.WriteToFile(outputfilename ,empty);
+        cipher.WriteToFile(outputfilename ,empty, ' ');
     }
     
     

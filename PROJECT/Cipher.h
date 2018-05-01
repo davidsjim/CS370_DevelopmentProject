@@ -22,7 +22,7 @@ public:
 // read the input file
 bool ReadInput(); 
 void ReadKeyFile(istream& istr);
-void WriteToFile(string& filename, string contents);
+void WriteToFile(string& filename, string contents, char CipherType);
 int RandNumGen(int limit);
 void ReadWordBank(istream& istr);
 

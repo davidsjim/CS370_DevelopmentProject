@@ -121,7 +121,9 @@ int main(int argc, char* argv[]){
         
        Cipher cipher; 
        cipher.ReadKeyFile(keyfile);
-       bool notempty =  cipher.ReadInput(wordbank);
+       //DECRYPT WORD BANK
+       cipher.ReadWordBank(wordbank);
+       bool notempty =  cipher.ReadInput();
        
        
        

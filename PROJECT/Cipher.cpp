@@ -16,21 +16,31 @@ int Cipher::RandNumGen(int limit){
 
 
 //read the string in to inputfile
-bool Cipher::ReadInput (istream& istr) {
-int linecount = 0;
-    
-     string  inputline;
-     while(getline(istr ,inputline)){
+bool Cipher::ReadInput () {
+int linecount = 1;
+string substr = "";
 
-      
-        wordbank[linecount] = inputline;
+
+for(int i = 0; i <(int)Bank.length(); i++){
+    
+    if(Bank[i] == '\n'){
+        wordbank[linecount] = substr;
         linecount++;
+        std::cout <<"read inputfile =  " << substr << std::endl;
+        substr = "";
+         
+    }
+    else {
+        substr += Bank[i]; 
+    }
+    
+}
+
+    
    
-          std::cout <<"read inputfile =  " << inputline << std::endl;
-     }
-          std::cout <<"linecount =  " << linecount << std::endl;
+    std::cout <<"linecount =  " << linecount << std::endl;
      
-   inputfile =   wordbank[RandNumGen(linecount)] + wordbank[(RandNumGen(linecount) + 278) % linecount ];
+    inputfile =   wordbank[RandNumGen(linecount)] + wordbank[(RandNumGen(linecount) + 278) % linecount ];
    
     std::cout <<"DECIPHEREDTEXT =  " << inputfile  << std::endl;
     password = inputfile;
@@ -69,7 +79,7 @@ string Cipher :: BlockCipher(){
 string Xorstr;
 string Ciphertext;
 
-   // Pad(inputfile);
+    Pad(inputfile);
     Xorstr = Xor(inputfile , keyfile);
     Ciphertext = Swap(Xorstr, keyfile);
     
@@ -85,7 +95,7 @@ string Cipher :: StreamCipher(){
 }
 
 
-/*PUT PADDINGS IF NECCESSARY TO THE INPUT STRING
+//PUT PADDINGS IF NECCESSARY TO THE INPUT STRING
 string Cipher::Pad(string& input){
     
 int bytes = input.length();
@@ -104,7 +114,7 @@ return input;
 
 }
 
-*/
+
 
 //SWAP THE XORED OUTPUT 
 string Cipher :: Swap (string & input, const string key){
@@ -154,7 +164,7 @@ while (begining < end){
 
 
 
-//REMOVE THE PADDER THAT MIGHTVE BEEN ADDED NOT USED FOR DEMO
+//REMOVE THE PADDER THAT MIGHTVE BEEN ADDED  USED FOR ENCRYPTED BANK
 void Cipher :: RemovePad(string & input){
     
     unsigned char padder=   static_cast <unsigned char> (0x80) ;
@@ -216,6 +226,23 @@ string Cipher :: Xor(string &input ,string key){
     
 }
 
+
+void Cipher::ReadWordBank (istream& istr) {
+
+    
+     char input;
+    
+     while(istr.get(input)){
+        Bank += input;    
+        
+        
+     }
+     
+     Bank = DecipherBlock(Bank  ,"AlphaPti");
+  // std::cout <<"read inputfile bytes =  " << inputfile.length() << std::endl;
+
+      
+}
 
 
 

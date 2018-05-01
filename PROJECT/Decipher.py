@@ -1,4 +1,5 @@
 import sys
+
 #DECIPHER THE STREAM ALGORTIHM
 def DecipherStream(  input , key):
 
@@ -72,3 +73,8 @@ def Swap(input ,  key):
     return input
 
 if __name__ == "__main__":
+    filename = sys.argv[1]
+    CipherType = sys.argv[2]
+    Efile = open(filename, 'r')
+
+

@@ -20,11 +20,11 @@ public:
     
 
 // read the input file
-bool ReadInput(istream& istr); 
+bool ReadInput(); 
 void ReadKeyFile(istream& istr);
 void WriteToFile(string& filename, string contents);
 int RandNumGen(int limit);
-
+void ReadWordBank(istream& istr);
 
 
 //encryption methods
@@ -50,6 +50,7 @@ string password = "";
 string keyfile = "";
 string Xoredoutput = "";    
 string wordbank [200];
+string Bank = "";
 
     
 };
